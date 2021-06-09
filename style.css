@@ -36,7 +36,7 @@ body{
   position: relative;
   top: 175px;
   left: 550px;
-  background-image: url("./damulag.png");
+  background-image: url("./obstacle1.png");
   background-size: cover;
   animation: obstacle 1.35s infinite ease-in-out;
 }

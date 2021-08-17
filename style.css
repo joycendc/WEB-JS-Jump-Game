@@ -1,11 +1,74 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body{
-  height: 90vh;
+  font-family: 'Comfortaa', cursive;
+  color: white;
+ text-shadow: 2px 2px gray;
+}
+.gameplay{
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: cadetblue;
-  color: white;
+  background-color: crimson;
+
+  background-size: cover;
+  background-blend-mode: darken;
+}
+
+.gameplay::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: .5;
+  pointer-events: none;
+  background-image: url(hearts.png);
+  background-size: cover;
+  background-repeat: repeat;
+  animation: falling-hearts 20s linear infinite;
+  z-index: 0;
+  background-blend-mode: lighten;
+}
+
+
+.head {
+  font-size: 3em;
+}
+h1 {
+  margin-top: 5px;
+  font-family: 'Permanent Marker', cursive;
+  text-shadow: 2px 2px darkgray;
+  font-weight: 700;
+}
+.select {
+  margin: 30px;
+}
+
+img {
+  height: 230px;
+  width: 120px;
+  object-fit: contain;
+}
+
+img:hover {
+  box-shadow: rgba(250, 250, 250, 0.5) 0 0 0 1000000px inset;
+  animation: show 0.5s;
+  animation-iteration-count: infinite; 
+}
+
+.opt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #score { text-align: center; }
@@ -13,52 +76,383 @@ body{
 #text { text-align: center; }
 
 #game {
-  width: 600px;
-  height: 300px;
-  border: 2px solid black;
-  margin: 10px;
+  z-index: 0;
+  width: 50%;
+  height: 60%;
+  margin-top: 5px;
   background-image: url("./bg.png");
-  background-size: contain;
+  background-size: cover;
+  -webkit-transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+}
+
+#path {
+  width: 50%;
+  height: 30%;
+  background-size: 40% 100%;
+  background-image: linear-gradient(-75deg,crimson, red, crimson, red, crimson);
+  animation: gradient 2s infinite linear;
+  -moz-animation: gradient 2s infinite linear;
+  -webkit-animation: gradient 2s infinite linear;
+  animation-iteration-count: infinite;
 }
 
 #character {
-  height: 75px;
-  width: 75px;
-  top: 225px;
+  height: 140px;
+  width: 70px;
+  top: 105%;
+  left: 10px;
   position: relative;
   background-image: url("./doraemon.png");
   background-size: cover;
+  filter: drop-shadow(3px 3px 3px #FFF);
 }
 
 #obstacle {
-  width: 50px;
-  height: 50px;
+  width: 75px;
+  height: 140px;
   position: relative;
-  top: 175px;
+  top: 65%;
   left: 550px;
   background-image: url("./obstacle1.png");
   background-size: cover;
-  animation: obstacle 1.35s infinite ease-in-out;
+  animation: obstacle 2.2s infinite linear;
+  filter: drop-shadow(3px 3px 3px #FFF);
 }
 
-@keyframes obstacle {
-  0%{left: 550px;}
-  100%{left: -50px;}
+.pts {
+  display: flex;
+
 }
 
-.jump-animation {
-  animation: jump 0.5s;
+#bot {
+  margin-bottom: 20px;
 }
 
-@keyframes jump {
-  0%{top: 225px;}
-  50%{top: 75px;}
-  75%{top: 75px;}
-  100%{top: 225px;}
+#score {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 h3 {
-  font-size: small;
+  font-size: large;
   padding: 0;
   margin: 0;
+}
+
+.jump-animation {
+  animation: jump 0.8s;
+}
+
+.wrap::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: .5;
+  pointer-events: none;
+  background-image: url(hearts.png);
+  background-size: cover;
+  background-repeat: repeat;
+  animation: falling-hearts 20s linear infinite;
+}
+
+.postcard {
+  width: 800px;
+  height: 100vh;
+  background-color: #f7f7f7;
+  margin: 0 auto;
+  border-radius: 2%;
+  display: flex;
+  justify-content: space-between;
+  padding: 3em;
+  box-shadow: .8em .8em 15px rgba(0,0,0,.3);
+  -ms-transform: rotate(2.5deg); /* IE 9 */
+  -webkit-transform: rotate(2.5deg); /* Chrome, Safari, Opera */
+  transform: rotate(2.5deg);
+  -moz-transition: all .5s ease;
+  -webkit-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  transition: all .5s ease;
+}
+
+.title {
+  position: sticky;
+  top: 0;
+  text-align: center;
+  font-size: 4em;
+  color: crimson;
+  margin: 30px;
+  z-index: 1;
+  background-color: #fff;
+  box-shadow: 0 .5px 6px -6px black;
+}
+
+p {
+  display: inline;
+  font-size: 1.3em;
+}
+
+/*animation*/
+.postcard:hover,
+.postcard:active,
+.postcard:focus{
+  -ms-transform: rotate(0deg); /* IE 9 */
+  -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
+  transform: rotate(0deg);
+  -moz-transition: all .5s ease;
+  -webkit-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  transition: all .5s ease;
+
+
+}
+
+/*form*/
+input,
+textarea {
+  border: none;
+  border-radius: 4%;
+  height: 1.9em;
+  padding: .7em;
+  font-size: 1.3em;
+  font-family: 'Varela Round', 'Quicksand', sans-serif;
+}
+
+input:focus,
+textarea:focus {
+   outline-color: pink;
+}
+
+textarea {
+  overflow: auto;
+  resize: both;
+  min-height: 350px;
+  min-width: 50vw;
+  max-width: 60vw;
+  margin-top: .5em;
+  margin-bottom: 1em;
+}
+
+.push{
+  margin-bottom: 1em;
+  margin-top: .5em;
+}
+
+
+
+/*footer*/
+footer {
+  margin: 2em auto;
+  text-align: center;
+  font-family: 'Varela Round', 'Quicksand', sans-serif;
+  color: white;
+}
+
+footer p {
+  font-size: 1em;
+  letter-spacing: 1px;
+}
+
+@keyframes falling-hearts {
+  0% {background-position: 0% 100%;}
+}
+
+@-moz-keyframes falling-hearts {
+0% {background-position: 0% 100%;}
+}
+
+@-webkit-keyframes falling-hearts {
+0% {background-position: 0% 100%;}
+}
+
+
+@keyframes obstacle {
+  0%{left: 550px;}
+  100%{
+    left: -50px;
+  }
+}
+
+@keyframes gradient {
+  0%{
+    background-position: 100% 50%;
+  
+  }
+ 
+  100%{
+    background-position: 0% 50%;
+  }
+}
+@-moz-keyframes gradient {
+  0%{
+    background-position: 100% 50%;
+  }
+ 
+  100%{
+    background-position: 0% 50%;
+  }
+}
+
+@-webkit-keyframes gradient {
+  0%{
+    background-position: 100% 50%;
+  }
+ 
+  100%{
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes show {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+
+@keyframes jump {
+  0%{top: 225px;}
+  50%{
+    top: 75px;
+    transform: rotateY(180deg);
+  }
+  75%{
+    top: 150px;
+    
+  }
+  100%{ 
+    top: 225px;
+    transform: rotateY(190deg);
+  }
+}
+
+.container{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.container .preloader{
+  animation: rotate 2.3s cubic-bezier(0.75, 0, 0.5, 1) infinite;
+}
+@keyframes rotate {
+  50%{
+    transform: rotate(360deg);
+  }
+  100%{
+    transform: rotate(720deg);
+  }
+}
+
+.preloader span{
+  position: absolute;
+  display: block;
+  height: 64px;
+  width: 64px;
+  background: red;
+  border: 1px solid red;
+  border-radius: 100%;
+}
+.preloader span:nth-child(1){
+  transform: translate(-28px, -28px);
+  animation: shape_1 2.3s cubic-bezier(0.75, 0, 0.5, 1) infinite;
+}
+@keyframes shape_1 {
+  60%{
+    transform: scale(0.4);
+  }
+}
+.preloader span:nth-child(2){
+  transform: translate(28px, -28px);
+  animation: shape_2 2.3s cubic-bezier(0.75, 0, 0.5, 1) infinite;
+}
+@keyframes shape_2 {
+  40%{
+    transform: scale(0.4);
+  }
+}
+.preloader span:nth-child(3){
+  position: relative;
+  border-radius: 0px;
+  transform: scale(0.98) rotate(-45deg);
+  animation: shape_3 2.3s cubic-bezier(0.75, 0, 0.5, 1) infinite;
+}
+@keyframes shape_3 {
+  50%{
+    border-radius: 100%;
+    transform: scale(0.5) rotate(-45deg);
+  }
+  100%{
+    transform: scale(0.98) rotate(-45deg);
+  }
+}
+.shadow{
+  position: relative;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: block;
+  height: 16px;
+  width: 64px;
+  border-radius: 50%;
+  background-color: pink;
+  border: 1px solid pink;
+  animation: shadow 2.3s cubic-bezier(0.75, 0, 0.5, 1) infinite;
+}
+@keyframes shadow {
+  50%{
+    transform: translateX(-50%) scale(0.5);
+    border-color: #f2f2f2;
+  }
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  text-align: center;
+  background-color: #fefefe;
+  margin: 10% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }

@@ -3,21 +3,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Doraemon Game</title>
+  <title>Happy</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap" rel="stylesheet"> 
 </head>
 <body>
-  <h3>ITEC 106 WEB SYSTEMS AND TECHNOLOGIES</h3>
-  <h3>FINAL EXAM: GOOGLE CHROME OFFLINE DINOSAUR GAME CLONE</h3>
-  <h3>NAME</h3>
-  <h3>BSIT 3-4</h3>
- 
-  <div id="game">
-    <div id="character"></div>
-    <div id="obstacle"></div>
+  <audio id="crazier">
+      <source src="crazier.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  <div class="container">
+    <div class="preloader">
+       <span></span>
+       <span></span>
+       <span></span>
+    </div>
+    <div class="shadow"></div>
+ </div>
+   <div id="myModal" class="modal">
+      <div class="modal-content">
+        <h1>I LOVE YOU BABY</h1>
+      </div>
+    </div>
+  <div class="gameplay">
+    
+    <audio id="jump">
+      <source src="jump.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+    <h1 class="head">HAPPY 3RD MONTHSARY BABY</h2>
+    <div id="start">
+      <h2 class="select">PLEASE SELECT YOUR CHARACTER</h2>
+      <div class="opt">
+        <img class="img" id="one" src="./images/love.png"/>
+        <img class="img" id="two" src="./images/cen.png"/>
+      </div> 
+    </div>
+
+    <div id="game">
+      <div id="character"></div>
+      <div id="obstacle"></div>
+    </div>
+    <div id="path">
+    </div>
+    <div id="bot">
+      <div class="pts">
+        <h1>score: </h1>
+        <h1 id="score">0</h1>
+        <h1>/ 19</h1>
+      </div>
+      <h3 id="text">Press space to jump !</h3>
+    </div>
   </div>
-  <h1 id="score">0</h1>
-  <h2 id="text">Press space to start !</h2>
+ 
+  <div class="card">
+  <div class="wrap">
+    <h1 class="title">HAPPY 3RD MONTHSARY BABY</h1>
+    <div class="postcard">
+
+      <div class="letter">
+        <form action="#" method="post" class="message_form">
+          <p class="push">Dear </p><input type="text" id="recipient" name="recipient_name" placeholder="Angelie Cute" class="push" readonly><p> ,</p><br>
+          <label for="message">Message</label><br>
+          <textarea id="message" name="message_to_recipient" 
+          placeholder="Your eyes are like smoldering coals, merciless as they burn my soul in the most delightful way. 
+          Love you.Your eyes are like smoldering coals, merciless as they burn my soul in the most delightful way. Love you.Your eyes are like smoldering coals, merciless as they burn my soul in the most delightful way. Love you.Your eyes are like smoldering coals, merciless as they burn my soul in the most delightful way. Love you.Your eyes are like smoldering coals, merciless as they burn my soul in the most delightful way. Love you.Your eyes are like smoldering coals, merciless as they burn my soul in the most delightful way. Love you.Your eyes are like smoldering coals, merciless as they burn my soul in the most delightful way. Love you.Your eyes are like smoldering coals, merciless as they burn my soul in the most delightful way. Love you." readonly>
+        </textarea><br>
+          <p>Yours Lovingly, </p><br>
+          <input type="text" id="sender_name" name="sender" placeholder="Cute Na Uhugin" readonly>
+        </form>
+      </div>
+
+    
+      
+    </div>
+    
+  </div>
+  
+</div>
   <script src="script.js"></script>
 </body>
 </html>

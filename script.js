@@ -1,70 +1,145 @@
-//Initializing variables to reference from dom elements
+const game = document.getElementById("game");
+const path = document.getElementById("path");
+const bot = document.getElementById("bot");
 const character = document.getElementById("character");
 var obstacle = document.getElementById("obstacle");
 const score = document.getElementById("score");
 const text = document.getElementById("text");
+const image = document.getElementsByClassName("img");
+const start = document.getElementById("start");
+const jumpSound = document.getElementById("jump");
+const card = document.querySelector(".card");
+const gameplay = document.querySelector(".gameplay");
+const container = document.querySelector(".container");
+const crazier = document.getElementById("crazier");
+const modal = document.querySelector(".modal");
 
-//initialization of obstacles images
-var obstacles = ['url("./obstacle1.png")', 'url("./obstacle2.png")'];
+crazier.play();
 
-//Function to make the character jump by using css animation 
-//To adjust the character postion based on the given animation frame
+gameplay.style.display = 'none';
+
+
+setTimeout(
+  function() {
+    container.style.display = 'none';
+    gameplay.style.display = 'flex';
+    
+  }, 3000);
+
+jumpSound.volume = 0.1;
+var obstacles = ['url("images/cen.png")', 'url("images/cen.png")'];
+
+// character.style.backgroundImage = `url('images/love.png')`;
+game.style.backgroundImage = `url('images/bg${parseInt(score.innerText) + 1}.png')`;
+
+// game.style.background = colors[score.innerText];
+
+obstacle.style.display = 'none';
+card.style.display = 'none';
+
+
+var i = 0;
+
+game.style.display = 'none'; 
+path.style.display = 'none'; 
+bot.style.display = 'none'; 
+
+var selector = function (event) {
+  gameplay.style.backgroundImage = `url('images/bg${parseInt(score.innerText) + 1}.png')`;
+  start.style.display = 'none'; 
+  game.style.display = 'block'; 
+  path.style.display = 'block'; 
+  bot.style.display = 'block'; 
+  
+  var selected = event.target.id;
+
+  if(selected === "one"){
+    character.style.backgroundImage = `url('images/love.png')`;
+    obstacle.style.backgroundImage = `url('images/cen.png')`;
+  }else{
+    obstacle.style.backgroundImage = `url('images/love.png')`;
+    character.style.backgroundImage = `url('images/cen.png')`;
+    obstacle.style.transform = "rotateY(180deg)";
+    character.style.transform = "rotateY(180deg)";
+  }
+}
+        
+document.querySelectorAll('.img').forEach(item => {
+  item.addEventListener('click', selector, false);
+});
+
+jumpSound.addEventListener('timeupdate', function() {
+  var t = jumpSound.currentTime;
+  if (t > jumpSound.duration - 1.4) {
+      jumpSound.pause();
+      jumpSound.currentTime = 0;
+  }
+});
+
 function jump() {
   character.classList.add("jump-animation");
-  setTimeout(() =>
+  setTimeout(() => 
   character.classList.remove("jump-animation"), 500);
 }
 
-//Making obstacle hideen when game hasnt started yet
-obstacle.style.display = 'none';
-
-//Event listener for user keypress that make the game start
-document.addEventListener('keypress', (event) => {
+var jumperFunction = function (event) {
+  text.style.display = "none";
+  jumpSound.play();
   if (!character.classList.contains('jump-animation')) {
-    //calling jump function when keypressed
     jump();
   }
 
-  //hiding the game guide when game starts
-  text.style.display = 'none';
-  
-  //Loop that only ends when player hit the obstacle
   setInterval(() => {
 
-    //getting the top prperty of the character for collision purpose
     const characterTop = parseInt(window.getComputedStyle(character)
       .getPropertyValue('top'));
-    //getting the left prperty of the obstacle for collision purpose
+   
     const obstacleLeft = parseInt(window.getComputedStyle(obstacle)
       .getPropertyValue('left'));
     
-
-    //Changing obstacle using random function to select image on array
-    // when the obstacle respawned
-    if(obstacleLeft >= 550){
-      obstacle.style.backgroundImage = obstacles[Math.random()<0.5?0:1];
-    }
-    
-    //Checking the obstacle and increasing score 
-    //when character successfully pass without hitting the obstacle
     if (obstacleLeft < 0) {
       obstacle.style.display = 'none';
       score.innerText++;
+       if(score.innerText >= 19){ 
+         container.style.display = 'block';
+         gameplay.parentNode.removeChild(gameplay);
+      
+         modal.style.display = 'block';
+         setTimeout(
+        function() {
+          container.style.display = 'none';
+          card.style.display = 'block';
+          modal.style.display = 'none';
+          
+        }, 2500);
+         game.style.display = 'none'; 
+         path.style.display = 'none'; 
+         bot.style.display = 'none'; 
+         score.innerText = 0;
+         document.body.style.background = "white";
+         document.body.style.color = "crimson";
+       }
     } else {
-      //else do nothing and loop
-      obstacle.style.display = ''
+      obstacle.style.display = '';
     }
-    
-    //Checking when character collided on the obstacle
-    //and hiding the obstacle 
-    //then showing alert that game is over and window willreload
+
     if (obstacleLeft < 50 && obstacleLeft > 0 && characterTop > 150) {
       obstacle.style.display = 'none';
-      alert("You got a score of: " + score.innerText +
-        "\n\nPlay again?");
-      location.reload();
+      if(score.innerText > 0){
+        score.innerText--;
+        game.style.backgroundImage = `url('images/bg${parseInt(score.innerText) + 1}.png')`;
+        gameplay.style.backgroundImage = `url('images/bg${parseInt(score.innerText) + 1}.png')`;
+        // game.style.background = colors[score.innerText];
+      }
+     // if(score.innerText == 0) text.style.opacity = 1;
+    }else if(obstacleLeft >= 550){ 
+      game.style.backgroundImage = `url('images/bg${parseInt(score.innerText) + 1}.png')`;
+      gameplay.style.backgroundImage = `url('images/bg${parseInt(score.innerText) + 1}.png')`;
+      // game.style.background = colors[score.innerText];
+      // obstacle.style.backgroundImage = obstacles[Math.random()<0.5?0:1];
     }
   }, 50);
-})
+}
 
-
+document.addEventListener('keypress', jumperFunction, false);
+document.addEventListener('touchstart', jumperFunction, false);
